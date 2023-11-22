@@ -45,15 +45,11 @@ public class SubmissionController {
                                  @RequestPart String key,
                                  @RequestPart String url) {
         System.out.println("Submission received");
-        try {
-            System.out.println(file.getFile().getAbsolutePath());
-            System.out.println(url);
-            System.out.println(submissionId);
-            System.out.println(scriptId);
-            System.out.println(key);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        //            System.out.println(file.getFile().getAbsolutePath());
+        System.out.println(url);
+        System.out.println(submissionId);
+        System.out.println(scriptId);
+        System.out.println(key);
         RestTemplate restTemplate = new RestTemplate();
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
         restTemplate.postForEntity(url,feedback, Void.class);

@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -45,7 +46,7 @@ public class SubmissionController {
 //    }
 
     @RequestMapping(path = "/uploadSubmission", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public void uploadSubmission(@RequestPart Resource file,
+    public ResponseEntity<Void> uploadSubmission(@RequestPart Resource file,
                                  @RequestPart Long submissionId,
                                  @RequestPart Long scriptId,
                                  @RequestPart String key,
@@ -65,5 +66,6 @@ public class SubmissionController {
         HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
         System.out.println(objectMapper.writeValueAsString(feedback));
         restTemplate.postForEntity(url,request, Void.class);
+        return ResponseEntity.ok(null);
     }
 }

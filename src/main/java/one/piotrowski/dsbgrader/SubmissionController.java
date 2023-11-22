@@ -63,6 +63,7 @@ public class SubmissionController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
+        System.out.println(objectMapper.writeValueAsString(feedback));
         restTemplate.postForEntity(url,request, Void.class);
     }
 }

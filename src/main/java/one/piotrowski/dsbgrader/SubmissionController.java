@@ -10,6 +10,10 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 @RequestMapping("/submission")
 public class SubmissionController {
+    @GetMapping("/test")
+    public void test() {
+        System.out.println("request detected");
+    }
 
     @GetMapping("/upload")
     public void uploadSubmission(@RequestBody Resource file,

@@ -15,7 +15,7 @@ public class SubmissionController {
         System.out.println("request detected");
     }
 
-    @GetMapping("/upload")
+    @PostMapping("/upload")
     public void uploadSubmission(@RequestBody Resource file,
                                  @RequestBody Long submissionId,
                                  @RequestBody Long scriptId,

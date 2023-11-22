@@ -3,19 +3,19 @@ package one.piotrowski.dsbgrader;
 import nl.tudelft.labracore.api.dto.RoleSummaryDTO;
 
 public class Feedback {
-    final private Long submissionId;
+    final public Long submissionId;
 
-    final private Long scriptId;
+    final public Long scriptId;
 
-    final private RoleSummaryDTO.TypeEnum visibleFor;
+    final public RoleSummaryDTO.TypeEnum visibleFor;
 
-    final private String textualFeedback;
+    final public String textualFeedback;
 
-    final private Integer score;
+    final public Integer score;
 
-    final private String key;
+    final public String key;
 
-    final private Boolean success;
+    final public Boolean success;
 
     public Feedback(Long submissionId, Long scriptId, String textualFeedback, Integer score, String key, Boolean success) {
         this.submissionId = submissionId;

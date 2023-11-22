@@ -14,12 +14,20 @@ java {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
+
+    maven {
+        url = uri("https://artifacts.alfresco.com/nexus/content/repositories/public")
+    }
+    maven {
+        url = uri("https://build.shibboleth.net/nexus/content/repositories/releases")
+    }
     maven {
         url = uri("https://gitlab.ewi.tudelft.nl/api/v4/projects/3611/packages/maven")
     }
     maven {
-        url = uri("https://gitlab.ewi.tudelft.nl/api/v4/projects/3710/packages/maven")
+        url = uri("https://gitlab.ewi.tudelft.nl/api/v4/projects/3634/packages/maven")
     }
     maven {
         url = uri("https://gitlab.ewi.tudelft.nl/api/v4/projects/8633/packages/maven")
@@ -29,7 +37,6 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-
     implementation("nl.tudelft.labrador:labradoor:$labradoorVersion") {
         exclude("org.springframework.boot", "spring-boot-devtools")
     }

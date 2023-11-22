@@ -21,6 +21,8 @@ public class SubmissionController {
                                  @RequestBody Long scriptId,
                                  @RequestBody String key,
                                  @RequestBody String url) {
+        System.out.println("Submission received");
+        System.out.println(url);
         try {
             System.out.println(file.getFile().getAbsolutePath());
         } catch (IOException e) {

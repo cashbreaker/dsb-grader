@@ -48,9 +48,9 @@ public class SubmissionController {
                                  @RequestPart Long submissionId,
                                  @RequestPart Long scriptId,
                                  @RequestPart String key,
-                                 @RequestPart String url) throws JsonProcessingException {
+                                 @RequestPart String url) throws IOException {
         System.out.println("Submission received");
-        //            System.out.println(file.getFile().getAbsolutePath());
+        System.out.println(file.getFile().getName());
         System.out.println(url);
         System.out.println(submissionId);
         System.out.println(scriptId);

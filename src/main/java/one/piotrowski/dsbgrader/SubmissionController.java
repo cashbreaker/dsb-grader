@@ -44,11 +44,11 @@ public class SubmissionController {
 
     @RequestMapping(path = "/uploadSubmission", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public void uploadSubmission(@RequestPart Resource file,
-                                 @RequestPart Long submissionId,
-                                 @RequestPart Long scriptId,
-                                 @RequestPart String key,
-                                 @RequestPart String url) throws IOException {
+    public ResponseEntity<Void> uploadSubmission(@RequestPart Resource file,
+                                                   @RequestPart Long submissionId,
+                                                   @RequestPart Long scriptId,
+                                                   @RequestPart String key,
+                                                   @RequestPart String url) throws IOException {
         System.out.println("Submission received");
         System.out.println(file.getFile().getName());
         System.out.println(url);
@@ -58,12 +58,12 @@ public class SubmissionController {
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
         System.out.println(objectMapper.writeValueAsString(feedback));
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
-
-        restTemplate.postForEntity(url,request, Void.class);
-//        return ResponseEntity.ok(null);
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
+//
+//        restTemplate.postForEntity(url,request, Void.class);
+        return ResponseEntity.ok(null);
     }
 }

@@ -1,6 +1,9 @@
 package one.piotrowski.dsbgrader;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +12,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/submission")
@@ -44,17 +48,19 @@ public class SubmissionController {
 
     @RequestMapping(path = "/uploadSubmission", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> uploadSubmission(@RequestPart Resource file,
+    public ResponseEntity<Void> uploadSubmission(@RequestPart MultipartFile file,
                                                    @RequestPart Long submissionId,
                                                    @RequestPart Long scriptId,
                                                    @RequestPart String key,
                                                    @RequestPart String url) throws IOException {
         System.out.println("Submission received");
-        System.out.println(file.getFile().getName());
         System.out.println(url);
         System.out.println(submissionId);
         System.out.println(scriptId);
         System.out.println(key);
+
+        String fileName = file.getOriginalFilename();
+        Files.copy(file.getInputStream(), Paths.get("./" + fileName), StandardCopyOption.REPLACE_EXISTING);
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
         System.out.println(objectMapper.writeValueAsString(feedback));

@@ -48,7 +48,6 @@ public class SubmissionController {
 //    }
 
     @RequestMapping(path = "/uploadSubmission", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> uploadSubmission(@RequestPart MultipartFile file,
                                                    @RequestPart Long submissionId,
                                                    @RequestPart Long scriptId,
@@ -60,7 +59,7 @@ public class SubmissionController {
         System.out.println(scriptId);
         System.out.println(key);
 
-        Path path = Paths.get("./submissions/" + submissionId + "/submission.zip");
+        Path path = Paths.get("./submissions/" + submissionId + "/" + file.getOriginalFilename());
         Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);

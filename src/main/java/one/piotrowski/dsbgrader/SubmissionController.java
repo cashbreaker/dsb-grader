@@ -2,6 +2,7 @@ package one.piotrowski.dsbgrader;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -59,8 +60,8 @@ public class SubmissionController {
         System.out.println(scriptId);
         System.out.println(key);
 
-        String fileName = file.getOriginalFilename();
-        Files.copy(file.getInputStream(), Paths.get("./" + fileName), StandardCopyOption.REPLACE_EXISTING);
+        Path path = Paths.get("./submissions/" + submissionId + "/submission.zip");
+        Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
         System.out.println(objectMapper.writeValueAsString(feedback));

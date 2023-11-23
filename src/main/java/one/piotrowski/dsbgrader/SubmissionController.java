@@ -5,10 +5,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -46,7 +43,8 @@ public class SubmissionController {
 //    }
 
     @RequestMapping(path = "/uploadSubmission", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<Void> uploadSubmission(@RequestPart Resource file,
+    @ResponseStatus(HttpStatus.OK)
+    public void uploadSubmission(@RequestPart Resource file,
                                  @RequestPart Long submissionId,
                                  @RequestPart Long scriptId,
                                  @RequestPart String key,
@@ -60,12 +58,12 @@ public class SubmissionController {
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
         System.out.println(objectMapper.writeValueAsString(feedback));
-//        RestTemplate restTemplate = new RestTemplate();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
-//
-//        restTemplate.postForEntity(url,request, Void.class);
-        return ResponseEntity.ok(null);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
+
+        restTemplate.postForEntity(url,request, Void.class);
+//        return ResponseEntity.ok(null);
     }
 }

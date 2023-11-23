@@ -1,5 +1,6 @@
 package one.piotrowski.dsbgrader;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -60,6 +61,8 @@ public class SubmissionController {
         System.out.println(key);
 
         Path path = Paths.get("./submissions/" + submissionId + "/" + file.getOriginalFilename());
+        File submissionDirectory = new File("./submissions/" + submissionId);
+        submissionDirectory.mkdir();
         Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);

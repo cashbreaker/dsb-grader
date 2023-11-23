@@ -59,13 +59,13 @@ public class SubmissionController {
         System.out.println(key);
 
         Feedback feedback = new Feedback(submissionId, scriptId, "test Feedback", 10, key, true);
-
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
         System.out.println(objectMapper.writeValueAsString(feedback));
-        restTemplate.postForEntity(url,request, Void.class);
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(feedback), headers);
+//
+//        restTemplate.postForEntity(url,request, Void.class);
         return ResponseEntity.ok(null);
     }
 }
